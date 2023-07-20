@@ -6,12 +6,12 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0">Thêm sản phẩm</h4>
+                <h4 class="mb-sm-0">Thêm slides</h4>
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Danh sách sản phẩm</a></li>
-                        <li class="breadcrumb-item active">Thêm sản phẩm</li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Danh sách slides</a></li>
+                        <li class="breadcrumb-item active">Thêm slides</li>
                     </ol>
                 </div>
 
@@ -23,15 +23,14 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Thêm danh mục</h4>
-                    <form action="{{ route('brand.update') }}" method="POST" enctype="multipart/form-data">
+                    <h4 class="card-title">Thêm slides</h4>
+                    <form action="{{ route('slide.post') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Tên danh mục</label>
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Tiêu đề silde</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" name="brand_name"
-                                value="{{$brand->brand_name}}">
-                                @error('brand_name')
+                                <input class="form-control" type="text" name="title" value="{{old('title')}}">
+                                @error('title')
                                     <span style="color:red">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -41,8 +40,8 @@
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label">Mô tả</label>
                             <div class="col-sm-10">
-                                <textarea id="textarea" class="form-control" maxlength="225" rows="3">
-                                    {{$brand->description}}
+                                <textarea id="textarea" class="form-control" maxlength="225" rows="3" name="description">
+                                    {{old('description')}}
                                 </textarea>
                             </div>
                         </div>
@@ -62,7 +61,7 @@
                             <label for="" class="col-sm-2 col-form-label"></label>
                             <div class="col-sm-10">
                                 <img class="rounded avatar-lg" id="show_image"
-                                    src="{{$brand->image ? ''.Storage::url($brand->image) : ''}}"
+                                    src=""
                                     alt="Card image cap">
                             </div>
                         </div>
@@ -70,7 +69,7 @@
                         <div class="row mb-3">
                             <label for="" class="col-sm-2 col-form-label"></label>
                             <div class="col-sm-10">
-                                <button class="btn btn-primary waves-effect waves-light">Chỉnh sửa thương hiệu</button>
+                                <button class="btn btn-primary waves-effect waves-light">Thêm slide</button>
                             </div>
                         </div>
                     </form>

@@ -30,7 +30,7 @@ class ProductsController extends Controller
         // dd($request->except('_token'));
         $params = $request->except('_token');
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $params['image'] = uploadFile('images', $request->file('image'));
+            $params['image'] = uploadFile('images/products', $request->file('image'));
         }
         $products = Products::create($params);
         if ($products->id) {
@@ -76,7 +76,7 @@ class ProductsController extends Controller
         $params = $request->except('_token');
         // dd($params);
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $resultDL = Storage::delete('/public/' . $product->image);
+            $resultDL = Storage::delete('/public/products' . $product->image);
             if ($resultDL) {
                 $params['image'] = uploadFile('images', $request->file('image'));
             } else {

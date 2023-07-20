@@ -45,8 +45,8 @@
                         <span>Quản lý slide</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="email-inbox.html">Danh sách slide</a></li>
-                        <li><a href="{{route('product.add')}}">Thêm sản slide</a></li>
+                        <li><a href="{{route('slide.list')}}">Danh sách slide</a></li>
+                        <li><a href="{{route('slide.add')}}">Thêm sản slide</a></li>
                     </ul>
                 </li>
 

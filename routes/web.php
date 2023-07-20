@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\BrandsController;
 use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\SlidesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +22,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('/admin')->name('admin.')->group(function () {
-    Route::get('/', [ProductsController::class, 'index'])->name('dashboard');
-});
+Route::get('/', [AdminController::class, 'index'])->name('dashboard');
+
 
 
 // Admin routes product
@@ -42,6 +43,13 @@ Route::prefix('/brand')->name('brand.')->group(function () {
     Route::get('/add', [BrandsController::class, 'addBrands'])->name('add');
     Route::post('/add', [BrandsController::class, 'postBrands'])->name('post');
     Route::get('/edit/{id}', [BrandsController::class, 'editBrands'])->name('get_edit');
-    // Route::get('/edit/{id}', [BrandsController::class, 'editBrands'])->name('get_edit');
+    Route::post('/update', [BrandsController::class, 'updateBrands'])->name('update');
     Route::get('/delete/{id}', [BrandsController::class, 'deleteBrands'])->name('delete');
+});
+
+// Admin routes slides
+Route::prefix('/slide')->name('slide.)')->group(function() {
+    Route::get('/list', [SlidesController::class, 'listSlides'])->name('list');
+    Route::get('/add', [SlidesController::class, 'addSlides'])->name('add');
+    Route::get('/add', [SlidesController::class, 'postSlides'])->name('post');
 });

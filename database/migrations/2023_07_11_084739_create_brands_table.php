@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->integer('status')->default(1)->comment('Trạng thái: 0-unactive, 1-active');
             $table->timestamps();
+            $table->softDeletes(); 
         });
     }
 
