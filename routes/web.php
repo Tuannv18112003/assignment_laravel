@@ -60,3 +60,10 @@ Route::prefix('/slide')->name('slide.')->group(function() {
 // ROUTES FRONTEND 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+
+Route::prefix('/admin')->group(function() {
+    Route::get('/', function() {
+        return 'admin';
+    });
+});
+

@@ -17,17 +17,13 @@ class HomeController extends Controller
 
 
         $products = Products::getFeaturedProducts();
-        resizeImageProduct($products, 500, 500);        
+        resizeImageProduct($products, 326, 326);        
+
 
         $slides = Slides::all();
         resizeImage($slides, 1393, 430);
 
         // dd($brands);
-
-
-
-
-
         return view('frontend.index', compact('products', 'slides', 'brands', 'title'));
     }
 }
