@@ -10,4 +10,5 @@ class Slides extends Model
 {
     use HasFactory, SoftDeletes;
     protected $table = 'slides';
+    protected $fillable = ['title', 'description', 'image'];
 }

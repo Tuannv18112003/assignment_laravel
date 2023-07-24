@@ -56,7 +56,7 @@ class BrandsRequest extends FormRequest
     {
         return [
             'brand_name' => 'Tên sản phẩm',
-            'description' => 'Email',
+            'description' => 'Mô tả',
             'image' => 'Hình ảnh'
         ];
     }

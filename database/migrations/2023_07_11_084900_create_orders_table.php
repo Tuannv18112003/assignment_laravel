@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamp('time')->nullable();
             $table->integer('status')->default(1)->comment('0: hủy đơn, 1: Chờ xác nhận, 2: Xác nhận, 3: Đang giao, 4: giao hàng thành công');
             $table->timestamps();
+            $table->softDeletes(); 
         });
     }
 

@@ -55,7 +55,7 @@ class BrandsController extends Controller
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $resultDL = Storage::delete('/public/brands' . $brand->image);
             if ($resultDL) {
-                $params['image'] = uploadFile('images', $request->file('image'));
+                $params['image'] = uploadFile('images/brands', $request->file('image'));
             } else {
                 $params['image'] = $brand->image;
             }

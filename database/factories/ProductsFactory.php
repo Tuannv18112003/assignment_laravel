@@ -22,7 +22,6 @@ class ProductsFactory extends Factory
         
         return [
             'product_name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
             'price' => fake()->numberBetween(1000, 10000),
             'brand_id' => Brands::inRandomOrder()->first()
             

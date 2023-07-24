@@ -14,11 +14,6 @@ use Intervention\Image\Facades\Image as Image;
 
 class ProductsController extends Controller
 {
-    public function index() {
-        $title = 'Dashboard';
-        return view('backend.dashboard', compact('title'));
-    }
-
     public function addProducts() {
         $title = 'Thêm sản phẩm';
         $brands = Brands::all();

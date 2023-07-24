@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('image');
             $table->integer('status')->default(1)->comment('0: unactive, 1: active');
             $table->timestamps();
+            $table->softDeletes(); 
         });
     }
 

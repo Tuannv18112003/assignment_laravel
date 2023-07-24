@@ -39,17 +39,6 @@
                         </div>
                         <!-- end row -->
 
-                        <div class="row mb-3">
-                            <label for="example-email-input" class="col-sm-2 col-form-label">Email</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="email" name="email"
-                                value="{{old('email')}}">
-                                @error('email')
-                                    <span style="color:red">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                        <!-- end row -->
 
                         <div class="row mb-3">
                             <label for="example-email-input" class="col-sm-2 col-form-label">Hình ảnh</label>

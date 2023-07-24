@@ -23,12 +23,6 @@ class ProductsRequest extends FormRequest
      */
     public function rules()
     {
-        $uniqueEmail = 'unique:products';
-        if (session('id')) {
-            $id = session('id');
-            $uniqueEmail = 'unique:products,email,'.$id;
-        }
-
         $rules = [];
         $id = session('id');
         $currentAction = $this->route()->getActionMethod();
@@ -40,7 +34,6 @@ class ProductsRequest extends FormRequest
                         // Xây dựng rules trong này
                         $rules = [
                             'product_name' => 'required',
-                            'email' => 'required|email|'.$uniqueEmail,
                             'color' => 'required',
                             'config' => 'required',
                             'price' => 'required|integer|min:0',
@@ -65,7 +58,6 @@ class ProductsRequest extends FormRequest
     {
         return [
             'product_name' => 'Tên sản phẩm',
-            'email' => 'Email',
             'image' => 'Hình ảnh',
             'color' => 'Màu sắc',
             'config' => 'Cấu hình',
@@ -80,9 +72,6 @@ class ProductsRequest extends FormRequest
     {
         return [
             'product_name.required' => ':attribute không được bỏ trống',
-            'email.required' => ':attribute không được bỏ trống',
-            'email.email' => ':attribute phải là email',
-            'email.unique' => ':attribute đã tồn tại',
             'image.required' => ':attribute không được bỏ trống',
             'color.required' => ':attribute không được bỏ trống',
             'config.required' => ':attribute không được bỏ trống',

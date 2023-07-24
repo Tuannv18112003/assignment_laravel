@@ -25,4 +25,16 @@ class Products extends Model
         'status'
     ];
 
+
+    public static function getFeaturedProducts() {
+        $featuredproducts = DB::table('products')
+        ->select('product_name', 'image', 'price', 'sale')
+        ->limit(8)
+        ->inRandomOrder()
+        ->get();
+
+        return $featuredproducts;
+
+    }
+
 }

@@ -48,12 +48,12 @@
                                     </td>
                                     <td class="flex justify-content-center">
                                         <a 
-                                            {{-- href="{{route('slide.get_edit', ['id'=>$slide->id])}}"  --}}
+                                            href="{{route('slide.get_edit', ['id'=>$slide->id])}}" 
                                             title="Edit slide">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a onclick="return confirm('bạn có chắc muốn xóa thương hiệu này ?')"
-                                            {{-- href="{{route('slide.delete', ['id'=>$slide->id])}}"  --}}
+                                        <a onclick="return confirm('bạn có chắc muốn xóa slide này ?')"
+                                            href="{{route('slide.delete', ['id'=>$slide->id])}}" 
                                             title="Delete slide">
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
@@ -68,6 +68,6 @@
         </div> <!-- end col -->
     </div> <!-- end row -->
     <div class="d-flex justify-content-end">
-        {{ $brands->links() }}
+        {{ $slides->links() }}
     </div>
 @endsection

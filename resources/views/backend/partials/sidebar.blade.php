@@ -46,7 +46,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{route('slide.list')}}">Danh sách slide</a></li>
-                        <li><a href="{{route('slide.add')}}">Thêm sản slide</a></li>
+                        <li><a href="{{route('slide.add')}}">Thêm slide</a></li>
                     </ul>
                 </li>
 
