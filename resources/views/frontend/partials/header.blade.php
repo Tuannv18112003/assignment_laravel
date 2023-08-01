@@ -21,4 +21,6 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{asset('frontend/assets/css/style.css')}}" rel="stylesheet">
+    
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 </head>

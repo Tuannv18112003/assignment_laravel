@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
-            $table->timestamp('time')->nullable();
+            $table->bigInteger('client_id');
+            $table->integer('total_price')->nullable();
             $table->integer('status')->default(1)->comment('0: hủy đơn, 1: Chờ xác nhận, 2: Xác nhận, 3: Đang giao, 4: giao hàng thành công');
             $table->timestamps();
             $table->softDeletes(); 

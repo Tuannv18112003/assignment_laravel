@@ -28,6 +28,15 @@
     <!-- Topbar End -->
 
 
+    @php
+        $brands = App\Models\Brands::all();
+        $carts = session()->get('carts');
+        $countCarts = 0;
+        if(isset($carts) && count($carts) > 0) {
+            $countCarts = count($carts);
+        }
+    @endphp
+
     <!-- Navbar Start -->
     <div class="container-fluid bg-dark mb-30">
         <div class="row px-xl-5">
@@ -55,19 +64,19 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="index.html" class="nav-item nav-link active">Trang chủ</a>
+                            <a href="{{route('home')}}" class="nav-item nav-link active">Trang chủ</a>
                             <a href="shop.html" class="nav-item nav-link">Shop</a>
                             <a href="contact.html" class="nav-item nav-link">Liên hệ</a>
-                            <a href="detail.html" class="nav-item nav-link">Đăng nhập</a>
+                            <a href="{{route('login')}}" class="nav-item nav-link">Đăng nhập</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <a href="" class="btn px-0">
                                 <i class="fas fa-heart text-primary"></i>
                                 <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
                             </a>
-                            <a href="" class="btn px-0 ml-3">
+                            <a href="{{route('cart.view')}}" class="btn px-0 ml-3">
                                 <i class="fas fa-shopping-cart text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">{{$countCarts}}</span>
                             </a>
                         </div>
                     </div>

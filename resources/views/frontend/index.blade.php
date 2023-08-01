@@ -102,21 +102,30 @@
             @php
                 $oldPrice = $product->price;
                 $currentPrice = $product->price - ($product->price * ($product->sale / 100));
-                // var_dump($currentPrice);
+                
             @endphp
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="{{$product->image ? Storage::url('images/resized_products_detail/'.$product->image) : 'https://picsum.photos/seed/picsum/500/500'}}" alt="">
+                        <img class="img-fluid w-100" src="{{$product->image && is_file($product->image) ? Storage::url('images/resized_products_detail/'.$product->image) : 'https://picsum.photos/seed/picsum/500/500'}}" alt="">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                            <form action="{{route('cart')}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="id" value="{{$product->id}}">
+                                <input type="hidden" name="price" value="{{$currentPrice}}">
+                                <a class="btn btn-outline-dark btn-square" href="">
+                                    <button type="submit" class="btn btn-outline-dark btn-square">
+                                        <i class="fa fa-shopping-cart"></i>        
+                                    </button>
+                                </a>
+                            </form>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">{{$product->product_name}}</a>
+                        <a class="h6 text-decoration-none text-truncate" href="{{route('detail', $product->id)}}">{{$product->product_name}}</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
                             @if (isset($product->sale) && $product->sale > 0)
                             <h5> {{number_format($currentPrice, 0, '', ',')}} VND</h5>
@@ -401,28 +410,28 @@
             <div class="col">
                 <div class="owl-carousel vendor-carousel">
                     <div class="bg-light p-4">
-                        <img src="img/vendor-1.jpg" alt="">
+                        <img src="{{asset('frontend/assets/img/vendor-1.jpg')}}" alt="">
                     </div>
                     <div class="bg-light p-4">
-                        <img src="img/vendor-2.jpg" alt="">
+                        <img src="{{asset('frontend/assets/img/vendor-2.jpg')}}" alt="">
                     </div>
                     <div class="bg-light p-4">
-                        <img src="img/vendor-3.jpg" alt="">
+                        <img src="{{asset('frontend/assets/img/vendor-3.jpg')}}" alt="">
                     </div>
                     <div class="bg-light p-4">
-                        <img src="img/vendor-4.jpg" alt="">
+                        <img src="{{asset('frontend/assets/img/vendor-4.jpg')}}" alt="">
                     </div>
                     <div class="bg-light p-4">
-                        <img src="img/vendor-5.jpg" alt="">
+                        <img src="{{asset('frontend/assets/img/vendor-5.jpg')}}" alt="">
                     </div>
                     <div class="bg-light p-4">
-                        <img src="img/vendor-6.jpg" alt="">
+                        <img src="{{asset('frontend/assets/img/vendor-6.jpg')}}" alt="">
                     </div>
                     <div class="bg-light p-4">
-                        <img src="img/vendor-7.jpg" alt="">
+                        <img src="{{asset('frontend/assets/img/vendor-7.jpg')}}" alt="">
                     </div>
                     <div class="bg-light p-4">
-                        <img src="img/vendor-8.jpg" alt="">
+                        <img src="{{asset('frontend/assets/img/vendor-8.jpg')}}" alt="">
                     </div>
                 </div>
             </div>

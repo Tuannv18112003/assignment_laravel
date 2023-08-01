@@ -18,6 +18,7 @@ class CouponsFactory extends Factory
     {
         return [
             'title' =>fake()->name(),
+            'code_discount' =>fake()->name(),
             'description' => fake()->paragraph(),
             'discount' => fake()->numberBetween(1, 100),
         ];

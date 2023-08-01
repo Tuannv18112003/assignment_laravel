@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Orders;
+use App\Models\Products;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +20,8 @@ class ProductOrderFactory extends Factory
     {
         return [
             'order_id' => Orders::inRandomOrder()->first(),
-            'product_id' => Orders::inRandomOrder()->first()
+            'product_id' => Products::inRandomOrder()->first(),
+            'quantity' => fake()->numberBetween(1, 10)
         ];
     }
 }

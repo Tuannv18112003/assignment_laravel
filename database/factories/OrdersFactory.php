@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Clients;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,7 +18,9 @@ class OrdersFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::inRandomOrder()->first()
+            'client_id' => Clients::inRandomOrder()->first(),
+
+            'total_price' => fake()->numberBetween(1000, 10000)
         ];
     }
 }

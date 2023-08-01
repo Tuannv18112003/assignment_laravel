@@ -16,11 +16,14 @@ return new class extends Migration
         Schema::create('coupons', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('description');
+            $table->string('code_discount');
+            $table->integer('type_discount')->nullable()->comment('0. Áp dụng tất cả, 1.Áp dụng đặc biệt');
             $table->integer('discount');
+            $table->string('image')->nullable();
+            $table->text('description')->nullable();
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
-            $table->integer('status')->default(1)->comment('0: unactive, 1: active');
+            // $table->integer('status')->default(1)->comment('0: unactive, 1: active');
             $table->timestamps();
             $table->softDeletes(); 
         });

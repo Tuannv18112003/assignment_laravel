@@ -28,9 +28,9 @@ class Products extends Model
 
     public static function getFeaturedProducts() {
         $featuredproducts = DB::table('products')
-        ->select('product_name', 'image', 'price', 'sale')
+        ->select('id','product_name', 'image', 'price', 'sale')
         ->limit(8)
-        ->inRandomOrder()
+        // ->inRandomOrder()
         ->get();
 
         return $featuredproducts;

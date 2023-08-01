@@ -7,6 +7,7 @@ use App\Http\Requests\ProductsRequest;
 use App\Models\Brands;
 use App\Models\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image as Image;
@@ -27,6 +28,9 @@ class ProductsController extends Controller
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $params['image'] = uploadFile('images/products', $request->file('image'));
         }
+
+        // dd($params)
+        
         $products = Products::create($params);
         if ($products->id) {
             $notification = [
@@ -59,28 +63,28 @@ class ProductsController extends Controller
     public function getEditProducts(ProductsRequest $request, $id) {
         $title = 'Chỉnh sửa sản phẩm';
         $product = Products::find($id);
-
-        $request->session()->put('id', $product->id);
         $brands = Brands::all();
         return view('backend.products.edit', compact('title', 'product', 'brands'));
     }
 
     public function editProducts(ProductsRequest $request) {
-       $id = session('id');
+       $id = $request->id;
         $product = Products::find($id);
         $params = $request->except('_token');
         // dd($params);
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $resultDL = Storage::delete('/public/products' . $product->image);
             if ($resultDL) {
-                $params['image'] = uploadFile('images', $request->file('image'));
+                $params['image'] = uploadFile('images/products', $request->file('image'));
             } else {
                 $params['image'] = $product->image;
             }
         }
 
+        // DB::enableQueryLog();
         $result = Products::where('id', $id)
         ->update($params);
+        // dd(DB::getQueryLog())
 
         if($result) {
             $notification = [

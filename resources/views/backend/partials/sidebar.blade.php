@@ -9,22 +9,47 @@
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li class="menu-title">Menu</li>
+                {{-- @php
+                    $user = Auth::user()->rule;
+                @endphp --}}
 
+
+                {{-- @if ($user == 1) --}}
                 <li>
-                    <a href="index.html" class="waves-effect">
+                    <a href="{{route('dashboard')}}" class="waves-effect">
                         <i class="ri-dashboard-line"></i><span class="badge rounded-pill bg-success float-end">3</span>
                         <span>Dashboard</span>
                     </a>
                 </li>
-    
+                {{-- @endif --}}
+                
+                <li>
+                    <a href="{{route('bill.list')}}" class="waves-effect">
+                        <i class="ri-bill-line"></i><span class="badge rounded-pill bg-success float-end">3</span>
+                        <span>Danh sách đơn hàng</span>
+                    </a>
+                </li>
+
+                {{-- @if ($user == 1) --}}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class=" ri-file-user-line"></i>
+                        <span>Quản lý tài khoản</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        {{-- <li><a href="{{ route('admin.list') }}">Danh sách tài khoản</a></li> --}}
+                        <li><a href="{{ route('admin.add') }}">Thêm tài khoản</a></li>
+                    </ul>
+                </li>
+                {{-- @endif --}}
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-product-hunt-line"></i>
                         <span>Quản lý sản phẩm</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('product.list')}}">Danh sách sản phẩm</a></li>
-                        <li><a href="{{route('product.add')}}">Thêm sản phẩm</a></li>
+                        <li><a href="{{ route('product.list') }}">Danh sách sản phẩm</a></li>
+                        <li><a href="{{ route('product.add') }}">Thêm sản phẩm</a></li>
                     </ul>
                 </li>
 
@@ -34,8 +59,8 @@
                         <span>Quản lý danh mục</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('brand.list')}}">Danh sách danh mục</a></li>
-                        <li><a href="{{route('brand.add')}}">Thêm danh mục</a></li>
+                        <li><a href="{{ route('brand.list') }}">Danh sách danh mục</a></li>
+                        <li><a href="{{ route('brand.add') }}">Thêm danh mục</a></li>
                     </ul>
                 </li>
 
@@ -45,8 +70,8 @@
                         <span>Quản lý slide</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('slide.list')}}">Danh sách slide</a></li>
-                        <li><a href="{{route('slide.add')}}">Thêm slide</a></li>
+                        <li><a href="{{ route('slide.list') }}">Danh sách slide</a></li>
+                        <li><a href="{{ route('slide.add') }}">Thêm slide</a></li>
                     </ul>
                 </li>
 
@@ -56,8 +81,8 @@
                         <span>Quản lý coupons</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="email-inbox.html">Danh sách coupons</a></li>
-                        <li><a href="{{route('product.add')}}">Thêm sản coupons</a></li>
+                        <li><a href="{{route('coupon.list')}}">Danh sách coupons</a></li>
+                        <li><a href="{{ route('coupon.add') }}">Thêm coupons</a></li>
                     </ul>
                 </li>
 
@@ -91,37 +116,6 @@
                         </li>
                     </ul>
                 </li>
-
-                <li class="menu-title">Pages</li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-account-circle-line"></i>
-                        <span>Authentication</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="auth-login.html">Login</a></li>
-                        <li><a href="auth-register.html">Register</a></li>
-                        <li><a href="auth-recoverpw.html">Recover Password</a></li>
-                        <li><a href="auth-lock-screen.html">Lock Screen</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-profile-line"></i>
-                        <span>Utility</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="pages-starter.html">Starter Page</a></li>
-                        <li><a href="pages-timeline.html">Timeline</a></li>
-                        <li><a href="pages-directory.html">Directory</a></li>
-                        <li><a href="pages-invoice.html">Invoice</a></li>
-                        <li><a href="pages-404.html">Error 404</a></li>
-                        <li><a href="pages-500.html">Error 500</a></li>
-                    </ul>
-                </li>
-            </ul>
         </div>
         <!-- Sidebar -->
     </div>

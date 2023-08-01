@@ -26,6 +26,7 @@
                     <h4 class="card-title">Thêm sản phẩm</h4>
                     <form action="{{ route('product.edit') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        <input type="text" name="id" hidden value="{{$product->id}}">
                         <div class="row mb-3">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Tên sản phẩm</label>
                             <div class="col-sm-10">
@@ -90,7 +91,7 @@
                         <div class="row mb-3">
                             <label for="example-password-input" class="col-sm-2 col-form-label">Giảm giá (%)</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="number" name="price" value="{{$product->sale}}">
+                                <input class="form-control" type="number" name="sale" value="{{$product->sale}}">
                                 @error('sale')
                                     <span style="color:red">{{ $message }}</span>
                                 @enderror

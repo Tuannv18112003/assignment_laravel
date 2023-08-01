@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('star')->nullable();
             $table->text('comment')->nullable();
-            $table->integer('user_id');
+            $table->integer('client_id');
             $table->integer('product_id');
             $table->timestamps();
             $table->softDeletes(); 

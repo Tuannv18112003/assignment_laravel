@@ -15,7 +15,6 @@ class BrandsController extends Controller
         $title = 'Danh sách thương hiệu';
         $brands = Brands::paginate(5)
         ->withQueryString();
-
         return view('backend.brands.list', compact('title', 'brands'));
     }
 

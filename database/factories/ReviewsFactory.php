@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Clients;
 use App\Models\Products;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +21,7 @@ class ReviewsFactory extends Factory
         return [
             'star' => fake()->numberBetween(1, 5),
             'comment' => fake()->text(),
-            'user_id' => User::inRandomOrder()->first(),
+            'client_id' => Clients::inRandomOrder()->first(),
             'product_id' => Products::inRandomOrder()->first(),
         ];
     }
