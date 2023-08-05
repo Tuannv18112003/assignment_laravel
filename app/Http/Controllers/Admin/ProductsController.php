@@ -44,7 +44,7 @@ class ProductsController extends Controller
 
     public function listProducts() {
         $title = 'Danh sách sản phẩm';
-        $products = Products::paginate(10)
+        $products = Products::orderBy('id', 'desc')->paginate(10)
         ->withQueryString();
 
         foreach ($products as $product) {

@@ -42,6 +42,9 @@ Route::get('/detail/{id}', [HomeController::class, 'detail'])->name('detail');
 
 // Shop
 Route::get('/shop/{id?}', [HomeController::class, 'shop'])->name('shop'); 
+// Route::get('/shop/list/{id?}', [HomeController::class, 'shop']);
+// Route::post('shop/filter', [HomeController::class, 'filterProducts'])->name('shop.filter');
+
 
 // Cart
 // Route::get('/cart', [CartsController::class, 'addToCart'])->name('cart');
@@ -49,6 +52,8 @@ Route::get('/cart', [CartsController::class, 'viewCart'])->name('cart.view');;
 Route::post('/cart', [CartsController::class, 'addToCart'])->name('cart');
 Route::get('/cart/delete/{id}', [CartsController::class, 'deleteCart'])->name('cart.delete');
 Route::get('/cart/checkout', [CartsController::class, 'checkoutCart'])->name('cart.checkout');
+Route::get('/cart/pay', [CartsController::class, 'listCartPayment'])->name('cart.pay');
+
 // Coupon
 Route::post('cart/coupon', [CartsController::class, 'addCoupon'])->name('cart.coupon.add');
 

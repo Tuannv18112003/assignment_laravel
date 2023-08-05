@@ -22,16 +22,16 @@
                 <div id="product-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner bg-light">
                         <div class="carousel-item active">
-                            <img class="w-100 h-100" src="{{$detail->image ? Storage::url($detail->image) : 'https://picsum.photos/200/300?random=1'}}" alt="Image">
+                            <img class="w-100 h-100" src="{{$detail->image ? Storage::url($detail->image) : 'https://picsum.photos/500/500?random=4'}}" alt="Image">
                         </div>
                         <div class="carousel-item">
-                            <img class="w-100 h-100" src="https://picsum.photos/200/300?random=1" alt="Image">
+                            <img class="w-100 h-100" src="https://picsum.photos/500/500?random=1" alt="Image">
                         </div>
                         <div class="carousel-item">
-                            <img class="w-100 h-100" src="https://picsum.photos/200/300?random=1" alt="Image">
+                            <img class="w-100 h-100" src="https://picsum.photos/500/500?random=2" alt="Image">
                         </div>
                         <div class="carousel-item">
-                            <img class="w-100 h-100" src="https://picsum.photos/200/300?random=1" alt="Image">
+                            <img class="w-100 h-100" src="https://picsum.photos/500/500?random=3" alt="Image">
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
@@ -57,12 +57,10 @@
                         <small class="pt-1">(99 Reviews)</small>
                     </div>
                     <h3 class="font-weight-semi-bold mb-4">
-                        <span>{{ number_format($detail->price, 0, '', ',')}}</span>
+                        <span>{{ number_format($detail->price, 0, '', ',')}}</span> VNĐ
                     </h3>
-                    <p class="mb-4">Volup erat ipsum diam elitr rebum et dolor. Est nonumy elitr erat diam stet sit
-                        clita ea. Sanc ipsum et, labore clita lorem magna duo dolor no sea
-                        Nonumy</p>
-                    <div class="d-flex mb-3">
+                    <p class="mb-4">{{$detail->short_description}}</p>
+                    {{-- <div class="d-flex mb-3">
                         <strong class="text-dark mr-3">Sizes:</strong>
                         <form>
                             <div class="custom-control custom-radio custom-control-inline">
@@ -111,7 +109,7 @@
                                 <label class="custom-control-label" for="color-5">Green</label>
                             </div>
                         </form>
-                    </div>
+                    </div> --}}
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <div class="input-group quantity mr-3" style="width: 130px;">
                             <div class="input-group-btn">
@@ -126,9 +124,15 @@
                                 </button>
                             </div>
                         </div>
+                        @php
+                            $oldPrice = $detail->price;
+                            $currentPrice = $detail->price - ($detail->price * ($detail->sale / 100));
+                            
+                        @endphp
                         <form action="{{route('cart')}}" method="post">
                             @csrf
                             <input type="text" name="id" hidden value="{{$detail->id}}">
+                            <input type="hidden" name="price" value="{{$currentPrice}}">
                             <button class="btn btn-primary px-3" type="submit"><i class="fa fa-shopping-cart mr-1"></i> Add To
                         </form>
                             Cart</button>
@@ -158,71 +162,23 @@
                 <div class="bg-light p-30">
                     <div class="nav nav-tabs mb-4">
                         <a class="nav-item nav-link text-dark active" data-toggle="tab"
-                            href="#tab-pane-1">Description</a>
-                        <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Information</a>
-                        <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Reviews (0)</a>
+                            href="#tab-pane-1">Mô tả</a>
+                        <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Cấu hình</a>
+                        <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Đánh giá (0)</a>
                     </div>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="tab-pane-1">
-                            <h4 class="mb-3">Product Description</h4>
-                            <p>Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam
-                                invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod
-                                consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam.
-                                Dolore diam stet rebum sed tempor kasd eirmod. Takimata kasd ipsum accusam sadipscing, eos
-                                dolores sit no ut diam consetetur duo justo est, sit sanctus diam tempor aliquyam eirmod
-                                nonumy rebum dolor accusam, ipsum kasd eos consetetur at sit rebum, diam kasd invidunt
-                                tempor lorem, ipsum lorem elitr sanctus eirmod takimata dolor ea invidunt.</p>
-                            <p>Dolore magna est eirmod sanctus dolor, amet diam et eirmod et ipsum. Amet dolore tempor
-                                consetetur sed lorem dolor sit lorem tempor. Gubergren amet amet labore sadipscing clita
-                                clita diam clita. Sea amet et sed ipsum lorem elitr et, amet et labore voluptua sit rebum.
-                                Ea erat sed et diam takimata sed justo. Magna takimata justo et amet magna et.</p>
+                            <p class="mb-3">
+                                {!!$detail->description!!}
+                            </p>
                         </div>
                         <div class="tab-pane fade" id="tab-pane-2">
-                            <h4 class="mb-3">Additional Information</h4>
-                            <p>Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam
-                                invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod
-                                consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam.
-                                Dolore diam stet rebum sed tempor kasd eirmod. Takimata kasd ipsum accusam sadipscing, eos
-                                dolores sit no ut diam consetetur duo justo est, sit sanctus diam tempor aliquyam eirmod
-                                nonumy rebum dolor accusam, ipsum kasd eos consetetur at sit rebum, diam kasd invidunt
-                                tempor lorem, ipsum lorem elitr sanctus eirmod takimata dolor ea invidunt.</p>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item px-0">
-                                            Sit erat duo lorem duo ea consetetur, et eirmod takimata.
-                                        </li>
-                                        <li class="list-group-item px-0">
-                                            Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
-                                        </li>
-                                        <li class="list-group-item px-0">
-                                            Duo amet accusam eirmod nonumy stet et et stet eirmod.
-                                        </li>
-                                        <li class="list-group-item px-0">
-                                            Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-6">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item px-0">
-                                            Sit erat duo lorem duo ea consetetur, et eirmod takimata.
-                                        </li>
-                                        <li class="list-group-item px-0">
-                                            Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
-                                        </li>
-                                        <li class="list-group-item px-0">
-                                            Duo amet accusam eirmod nonumy stet et et stet eirmod.
-                                        </li>
-                                        <li class="list-group-item px-0">
-                                            Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <p class="mb-3">
+                                {!!$detail->config!!}
+                            </p>
                         </div>
                         <div class="tab-pane fade" id="tab-pane-3">
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-md-6">
                                     <h4 class="mb-4">1 review for "Product Name"</h4>
                                     <div class="media mb-4">
@@ -273,7 +229,7 @@
                                         </div>
                                     </form>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -285,161 +241,65 @@
 
     <!-- Products Start -->
     <div class="container-fluid py-5">
-        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">You May
-                Also Like</span></h2>
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Sản phẩm liên quan</span></h2>
         <div class="row px-xl-5">
             <div class="col">
                 <div class="owl-carousel related-carousel">
-                    <div class="product-item bg-light">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/product-1.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i
-                                        class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i
-                                        class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i
-                                        class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i
-                                        class="fa fa-search"></i></a>
+                    @if(isset($relateds) && count($relateds) > 0)
+                    @foreach ($relateds as $related)
+                        <div class="product-item bg-light">
+                            <div class="product-img position-relative overflow-hidden">
+                                <img class="img-fluid w-100" src="{{$related->image ? Storage::url($related->image) : 'https://picsum.photos/327/327?random=5'}}" alt="">
+                                <div class="product-action">
+                                    <a class="btn btn-outline-dark btn-square" href="{{route('cart')}}"><i
+                                            class="fa fa-shopping-cart"></i></a>
+                                    <a class="btn btn-outline-dark btn-square" href=""><i
+                                            class="far fa-heart"></i></a>
+                                    <a class="btn btn-outline-dark btn-square" href=""><i
+                                            class="fa fa-sync-alt"></i></a>
+                                    <a class="btn btn-outline-dark btn-square" href=""><i
+                                            class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="text-center py-4">
+                                <a class="h6 text-decoration-none text-truncate" href="">{{$related->product_name}}</a>
+                                <div class="d-flex align-items-center justify-content-center mt-2">
+                                    @php
+                                        $sale_price = $related->price - ($related->price*($related->sale/100));
+                                    @endphp
+                                    @if ($related->sale > 0)
+                                        <h5>
+                                            <span>
+                                                {{number_format($sale_price, 0, '', ',')}}
+                                            </span>
+                                            VNĐ
+                                        </h5>
+                                        <h6 class="text-muted ml-2"><del>
+                                            <span>
+                                                {{number_format($related->price, 0, '', ',')}}
+                                        </span></del></h6>
+                                    @else
+                                        <h5>
+                                            <span>
+                                                {{number_format($sale_price, 0, '', ',')}}
+                                            </span>
+                                            VNĐ
+                                        </h5>
+                                    @endif
+                                </div>
+                                <div class="d-flex align-items-center justify-content-center mb-1">
+                                    <small class="fa fa-star text-primary mr-1"></small>
+                                    <small class="fa fa-star text-primary mr-1"></small>
+                                    <small class="fa fa-star text-primary mr-1"></small>
+                                    <small class="fa fa-star text-primary mr-1"></small>
+                                    <small class="fa fa-star text-primary mr-1"></small>
+                                    <small>(99)</small>
+                                </div>
                             </div>
                         </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>$123.00</h5>
-                                <h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small>(99)</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-item bg-light">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/product-2.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i
-                                        class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i
-                                        class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i
-                                        class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i
-                                        class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>$123.00</h5>
-                                <h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small>(99)</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-item bg-light">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/product-3.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i
-                                        class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i
-                                        class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i
-                                        class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i
-                                        class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>$123.00</h5>
-                                <h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small>(99)</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-item bg-light">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/product-4.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i
-                                        class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i
-                                        class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i
-                                        class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i
-                                        class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>$123.00</h5>
-                                <h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small>(99)</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-item bg-light">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/product-5.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i
-                                        class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i
-                                        class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i
-                                        class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i
-                                        class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>$123.00</h5>
-                                <h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small>(99)</small>
-                            </div>
-                        </div>
-                    </div>
+                        
+                    @endforeach
+                    @endif
                 </div>
             </div>
         </div>

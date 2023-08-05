@@ -39,6 +39,17 @@
                         <!-- end row -->
 
                         <div class="row mb-3">
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Mô tả ngắn</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" name="short_description" value="{{$product->short_description}}">
+                                @error('short_description')
+                                    <span style="color:red">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row mb-3">
                             <label for="example-email-input" class="col-sm-2 col-form-label">Hình ảnh</label>
                             <div class="col-sm-10">
                                 <input type="file" class="form-control" id="profile_image" name="image" >
@@ -71,7 +82,7 @@
                         <div class="row mb-3">
                             <label for="example-tel-input" class="col-sm-2 col-form-label">Cấu hình</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" name="config" value="{{$product->config}}">
+                                <textarea name="config" class="elm1">{{$product->config}}</textarea>
                                 @error('config')
                                     <span style="color:red">{{ $message }}</span>
                                 @enderror
@@ -101,7 +112,7 @@
                         <div class="row mb-3">
                             <label for="example-number-input" class="col-sm-2 col-form-label">Mô tả</label>
                             <div class="col-sm-10">
-                                <textarea id="elm1" name="description">{{$product->description}}</textarea>
+                                <textarea class="elm1" name="description">{{$product->description}}</textarea>
                             </div>
                         </div>
                         <!-- end row -->

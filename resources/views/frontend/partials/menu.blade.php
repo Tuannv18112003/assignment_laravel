@@ -48,7 +48,7 @@
                 <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                     <div class="navbar-nav w-100">
                         @foreach ($brands as $brand)
-                        <a href="" class="nav-item nav-link">{{$brand->brand_name}}</a>
+                        <a href="{{route('shop', $brand->id)}}" class="nav-item nav-link">{{$brand->brand_name}}</a>
                         @endforeach
                     </div>
                 </nav>
@@ -65,9 +65,9 @@
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
                             <a href="{{route('home')}}" class="nav-item nav-link active">Trang chủ</a>
-                            <a href="shop.html" class="nav-item nav-link">Shop</a>
+                            <a href="{{route('shop')}}" class="nav-item nav-link">Shop</a>
                             <a href="contact.html" class="nav-item nav-link">Liên hệ</a>
-                            <a href="{{route('login')}}" class="nav-item nav-link">Đăng nhập</a>
+                            {{-- <a href="{{route('login')}}" class="nav-item nav-link">Đăng nhập</a> --}}
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <a href="" class="btn px-0">

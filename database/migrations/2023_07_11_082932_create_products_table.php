@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('short_description', 255)->nullable();
             $table->string('image', 255)->nullable();
             $table->string('color', 255)->nullable();
-            $table->string('config', 255)->nullable();
+            $table->text('config', 255)->nullable();
             $table->integer('price');
             $table->integer('sale')->default(0)->nullable();
             $table->text('description')->nullable();
