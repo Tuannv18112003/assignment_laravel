@@ -3,15 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\InvoiceMail;
 use App\Models\Orders;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 
 class OrdersController extends Controller
 {
     public function listBill() {
         $title = 'Danh sách đơn hàng';
         $list_bills = Orders::getBill();
+        // dd($list_bills);
         return view('backend.bills.list_bills', compact('title', 'list_bills'));
     }
 
@@ -19,6 +24,7 @@ class OrdersController extends Controller
         $title = 'Chi tiết đơn hàng';
 
         $list_details = Orders::getBillDetails($id);
+
         return view('backend.bills.list_details', compact('title', 'list_details'));
     }
 
@@ -63,5 +69,40 @@ class OrdersController extends Controller
             ];
             return redirect()->route('bill.list')->with($notification);
         }
+    }
+
+    public function invoicePDF($id) {
+        $list_details = Orders::getBillDetails($id);
+
+        Pdf::setOption(['defaultFont' => 'roboto']);
+        $pdf = Pdf::loadView('backend.bills.invoice', compact('list_details'));
+        // $pdf->loadHTML('<h1>Test</h1>');
+        return $pdf->stream();
+    }
+
+
+    public function emailPDF($id) {
+
+        try {
+            $list_details = Orders::getBillDetails($id);
+            // dd($list_details[0]->email);
+            Mail::to($list_details[0]->email)->send(new InvoiceMail($list_details));
+    
+            $notification = [
+                'alert-type' => 'success',
+                'message' => 'Gửi email thành công'
+            ];
+    
+            return redirect()->back()->with($notification);
+
+        }catch(\Exception $e) {
+            $notification = [
+                'alert-type' => 'error',
+                'message' => 'Gửi email thất bại'
+            ];
+
+            return redirect()->back()->with($notification);
+        }
+        
     }
 }

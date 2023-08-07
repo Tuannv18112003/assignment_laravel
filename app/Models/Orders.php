@@ -34,6 +34,10 @@ class Orders extends Model
         ->join('products_orders', 'orders.id', '=', 'products_orders.order_id')
         ->join('products', 'products_orders.product_id', '=', 'products.id')
         ->select(DB::raw('clients.username AS username, 
+            clients.address AS address,
+            clients.email AS email,
+            clients.phone AS phone,
+            orders.id AS order_id,
             products_orders.quantity as quantity,
             products.product_name as product_name, 
             products.price as price, 

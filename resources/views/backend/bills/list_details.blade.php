@@ -24,7 +24,13 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h6>Tên khách hàng: {{isset($list_details) && count($list_details) > 0 ? $list_details[0]->username : 'hi'}}</h6>
+                <div class="d-flex justify-content-between items-center my-3">
+                    <h6>Tên khách hàng: {{isset($list_details) && count($list_details) > 0 ? $list_details[0]->username : 'hi'}}</h6>
+                    <div>
+                        <a href="{{route('invoice-pdf', $list_details[0]->order_id)}}" class="btn btn-success">In hóa đơn</a>
+                        <a href="{{route('email-pdf', $list_details[0]->order_id)}}" class="btn btn-info">Gửi email</a>
+                    </div>
+                </div>
                 <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
                     style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
@@ -33,24 +39,29 @@
                             <th>Tên Sản phẩm</th>
                             <th>Số lượng</th>
                             <th>Giá sản phẩm</th>
+                            <th>Tổng tiền</th>
                         </tr>
                     </thead>
 
 
                     <tbody>
-                        @if (isset($list_details) && count($list_details) > 0))
+                        @if (isset($list_details) && count($list_details) > 0)
                             @php
                                 $total_discount = 0;
+                                $total_current = 0;
                             @endphp
                             @foreach ($list_details as $key => $item)
                                 @php
-                                    $total_discount += $item->price;
+                                    $total_current = $item->price * $item->quantity;
+                                    $total_discount += $total_current;
                                 @endphp
                                 <tr>
                                     <td>{{++$key}}</td>
                                     <td>{{$item->product_name}}</td>
                                     <td>{{$item->quantity}}</td>
                                     <td>{{number_format($item->price, 0, '', ',')}} VNĐ</td>
+                                    <td>{{number_format($total_current, 0, '', ',')}} VNĐ</td>
+                                  
                                 </tr>
                             @endforeach
                                 <tr>

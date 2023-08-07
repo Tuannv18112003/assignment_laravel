@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\View\CartsController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +47,9 @@ Route::get('/shop/{id?}', [HomeController::class, 'shop'])->name('shop');
 // Route::get('/shop/list/{id?}', [HomeController::class, 'shop']);
 // Route::post('shop/filter', [HomeController::class, 'filterProducts'])->name('shop.filter');
 
+
+Route::get('invoice-pdf/{id}', [OrdersController::class, 'invoicePDF'])->name('invoice-pdf');
+Route::get('email-pdf/{id}', [OrdersController::class, 'emailPDF'])->name('email-pdf');
 
 // Cart
 // Route::get('/cart', [CartsController::class, 'addToCart'])->name('cart');
@@ -140,5 +145,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
 //     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
+
+Route::get('/user/invoice/{invoice}', function (Request $request, $invoiceId) {
+    return $request->user()->downloadInvoice($invoiceId);
+});
 
 require __DIR__.'/auth.php';
